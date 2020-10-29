@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
-public class Galgelogik {
+public class Galgelogik implements IGalgelogik{
     /** AHT afprøvning er muligeOrd synlig på pakkeniveau */
     ArrayList<String> muligeOrd = new ArrayList<String>();
     private String ordet;
@@ -79,7 +79,7 @@ public class Galgelogik {
     }
 
 
-    private void opdaterSynligtOrd() {
+    public void opdaterSynligtOrd() {
         synligtOrd = "";
         spilletErVundet = true;
         for (int n = 0; n < ordet.length(); n++) {
