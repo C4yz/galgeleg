@@ -7,7 +7,6 @@ import java.util.HashSet;
 public class Library {
 
     public static ArrayList<String> posibleWords = new ArrayList<>();
-    public GalgeController controller = new GalgeController();
 
     public void standartOrd(){
         posibleWords.add("bil");

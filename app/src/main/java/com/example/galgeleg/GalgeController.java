@@ -36,19 +36,19 @@ public class GalgeController {
     public void getTheWords(int choice) throws Exception {
 
         switch (choice){
-            case 1:
+            case 0:
                 library.standartOrd();
                 break;
-            case 2:
+            case 1:
                 library.hentOrdFraDr();
                 break;
-            case 3:
+            case 2:
                 library.hentOrdFraRegneark("1");
                 break;
-            case 4:
+            case 3:
                 library.hentOrdFraRegneark("2");
                 break;
-            case 5:
+            case 4:
                 library.hentOrdFraRegneark("3");
             default:
                 break;
