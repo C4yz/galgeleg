@@ -1,24 +1,41 @@
 package com.example.galgeleg;
 
-import android.widget.TextView;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class GalgeController {
 
-    private String ordet;
-    private ArrayList<String> brugteBogstaver = new ArrayList<String>();
-    private String synligtOrd;
-    private int antalForkerteBogstaver;
-    private boolean sidsteBogstavVarKorrekt;
-    private boolean spilletErVundet;
-    private boolean spilletErTabt;
+    private String theWordToGuess;
+    private String usedCorrectLetters;
+    private String visibleWord;
+    private int numberOfTries;
+    private int numberOfWrongLetters;
+    private boolean lastLetterWasCorrect;
+    private boolean playerHasWon;
+    private boolean playerHasLost;
 
     Library library = new Library();
+
+    public GalgeController(){
+        visibleWord = "";
+        theWordToGuess = "";
+        numberOfTries = 0;
+        usedCorrectLetters = "";
+    }
+
+    public void startNewGame(int choice) throws Exception {
+        getTheWords(choice);
+        numberOfWrongLetters = 0;
+        playerHasWon = false;
+        playerHasLost = false;
+        if (Library.posibleWords.isEmpty()) throw new IllegalStateException("Listen over mulige ord er tom!");
+        //theWordToGuess = Library.posibleWords.get(new Random().nextInt(Library.posibleWords.size()));
+        theWordToGuess = "hej";
+        System.out.println("Nyt spil - det skjulte ord er: "+ theWordToGuess);
+    }
+
 
     public static String hentUrl(String url) throws IOException {
         System.out.println("Henter data fra " + url);
@@ -63,4 +80,33 @@ public class GalgeController {
         return hiddenWord;
     }
 
+    public void updateWord(){
+
+        visibleWord = "";
+
+        for (char letter : theWordToGuess.toCharArray()) {
+            if(usedCorrectLetters.indexOf(letter) != -1){
+                visibleWord += letter;
+            }else{
+                visibleWord += "*";
+            }
+        }
+    }
+
+    public void guessedLetter(String guessedLetter){
+        if(theWordToGuess.contains(guessedLetter)){
+            usedCorrectLetters += guessedLetter;
+        }else{
+            numberOfTries++;
+        }
+        updateWord();
+    }
+
+    public String getVisibleWord() {
+        return visibleWord;
+    }
+
+    public String getTheWordToGuess(){
+        return theWordToGuess;
+    }
 }
