@@ -11,17 +11,16 @@ import com.example.galgeleg.R;
 
 import java.util.ArrayList;
 
-public class WrongLetters extends AppCompatActivity implements ILetters {
+public class CorrectLetters implements ILetters {
 
     GalgelegGame galgelegGame;
     Context context;
 
-    public WrongLetters (GalgelegGame galgelegGame, Context context){
+    public CorrectLetters(GalgelegGame galgelegGame, Context context){
+        this.context = context;
         this.galgelegGame = galgelegGame;
         galgelegGame.add(this);
-        this.context = context;
     }
-
 
     @Override
     public void update(String letter, String theWordToGuess, ArrayList<String> usedLetters) {
