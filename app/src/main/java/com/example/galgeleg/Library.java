@@ -1,5 +1,9 @@
 package com.example.galgeleg;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -25,7 +29,7 @@ public class Library {
 
         System.out.println("Henter data som kommasepareret CSV fra regnearket https://docs.google.com/spreadsheets/d/"+id+"/edit?usp=sharing");
 
-        String data = GalgeController.hentUrl("https://docs.google.com/spreadsheets/d/" + id + "/export?format=csv&id=" + id);
+        String data = hentUrl("https://docs.google.com/spreadsheets/d/" + id + "/export?format=csv&id=" + id);
         int linjeNr = 0;
 
         posibleWords.clear();
@@ -45,7 +49,7 @@ public class Library {
     }
 
     public void hentOrdFraDr() throws Exception {
-        String data = GalgeController.hentUrl("https://dr.dk");
+        String data = hentUrl("https://dr.dk");
         //System.out.println("data = " + data);
 
         data = data.substring(data.indexOf("<body")). // fjern headere
@@ -66,6 +70,18 @@ public class Library {
         posibleWords.addAll(new HashSet<String>(Arrays.asList(data.split(" "))));
 
         System.out.println("muligeOrd = " + posibleWords);
+    }
+
+    public static String hentUrl(String url) throws IOException {
+        System.out.println("Henter data fra " + url);
+        BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
+        StringBuilder sb = new StringBuilder();
+        String linje = br.readLine();
+        while (linje != null) {
+            sb.append(linje + "\n");
+            linje = br.readLine();
+        }
+        return sb.toString();
     }
 
 }

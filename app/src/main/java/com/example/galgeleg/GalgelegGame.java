@@ -29,15 +29,17 @@ public class GalgelegGame extends AppCompatActivity{
         Intent intent = getIntent();
         choice = intent.getIntExtra("choices",0);
 
-        theWordToGuess = galgeController.getTheWordToGuess();
-
         try {
             galgeController.startNewGame(choice);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        hiddenWord = controller.displayTheWord(theWordToGuess);
+        theWordToGuess = galgeController.getTheWordToGuess();
+
+        controller.displayTheWord(theWordToGuess);
+
+        hiddenWord = controller.getHiddenWord();
 
         textView = (TextView) findViewById(R.id.wordDisplay);
         textView.setText(hiddenWord);
