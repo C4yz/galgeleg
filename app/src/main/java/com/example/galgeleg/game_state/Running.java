@@ -56,8 +56,11 @@ public class Running implements IGameState{
         String hiddenWord = this.galgeController.getHiddenWord();
 
         for (int i = 0; i < wordToHide.length(); i++){
-            this.galgeController.setHiddenWord(hiddenWord += "*");
+            hiddenWord += "*";
         }
+
+        this.galgeController.setHiddenWord(hiddenWord);
+        this.galgeController.setVisibleWord(hiddenWord);
     }
 
     @Override
@@ -68,11 +71,12 @@ public class Running implements IGameState{
 
         for (char letter : theWordToGuess.toCharArray()) {
             if(usedCorrectLetters.indexOf(letter) != -1){
-                this.galgeController.setVisibleWord(visibleWord += letter);
+                visibleWord += letter;
             }else{
-                this.galgeController.setVisibleWord(visibleWord += "*");
+                visibleWord += "*";
             }
         }
+        this.galgeController.setVisibleWord(visibleWord);
     }
 
     @Override
@@ -91,9 +95,11 @@ public class Running implements IGameState{
             this.galgeController.setLastLetterWasCorrect(false);
         }
 
+        String visibleWord = this.galgeController.getVisibleWord();
+
         if(this.galgeController.getNumberOfTries() == 6 && !this.galgeController.getLastLetterWasCorrect()){
             this.galgeController.changeState(new PlayerLost(galgeController));
-        }else if(this.galgeController.getNumberOfTries() < 6 && !this.galgeController.getVisibleWord().contains("*")){
+        }else if(this.galgeController.getNumberOfTries() < 6 && !visibleWord.contains("*")){
             this.galgeController.changeState(new PlayerWon());
         }
     }

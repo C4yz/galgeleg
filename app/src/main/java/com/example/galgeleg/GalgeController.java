@@ -1,5 +1,8 @@
 package com.example.galgeleg;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.galgeleg.activities.GalgelegGame;
 import com.example.galgeleg.activities.Player_has_lost;
 import com.example.galgeleg.activities.Player_has_won;
@@ -9,7 +12,9 @@ import com.example.galgeleg.game_state.PlayerLost;
 import com.example.galgeleg.game_state.PlayerWon;
 import com.example.galgeleg.game_state.Running;
 
-public class GalgeController {
+import java.io.Serializable;
+
+public class GalgeController implements Parcelable{
 
     private String theWordToGuess;
     private String usedCorrectLetters;
@@ -36,6 +41,30 @@ public class GalgeController {
         playerHasWon = false;
         lastLetterWasCorrect = false;
     }
+
+    protected GalgeController(Parcel in) {
+        theWordToGuess = in.readString();
+        usedCorrectLetters = in.readString();
+        visibleWord = in.readString();
+        hiddenWord = in.readString();
+        numberOfTries = in.readInt();
+        numberOfWrongLetters = in.readInt();
+        lastLetterWasCorrect = in.readByte() != 0;
+        playerHasWon = in.readByte() != 0;
+        playerHasLost = in.readByte() != 0;
+    }
+
+    public static final Creator<GalgeController> CREATOR = new Creator<GalgeController>() {
+        @Override
+        public GalgeController createFromParcel(Parcel in) {
+            return new GalgeController( in );
+        }
+
+        @Override
+        public GalgeController[] newArray(int size) {
+            return new GalgeController[size];
+        }
+    };
 
     public void startNewGame(int choice) throws Exception {
         this.iGameState = new Running(this);
@@ -140,5 +169,23 @@ public class GalgeController {
 
     public boolean getLastLetterWasCorrect(){
         return lastLetterWasCorrect;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString( theWordToGuess );
+        dest.writeString( usedCorrectLetters );
+        dest.writeString( visibleWord );
+        dest.writeString( hiddenWord );
+        dest.writeInt( numberOfTries );
+        dest.writeInt( numberOfWrongLetters );
+        dest.writeByte( (byte) (lastLetterWasCorrect ? 1 : 0) );
+        dest.writeByte( (byte) (playerHasWon ? 1 : 0) );
+        dest.writeByte( (byte) (playerHasLost ? 1 : 0) );
     }
 }

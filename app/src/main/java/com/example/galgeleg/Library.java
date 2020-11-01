@@ -74,7 +74,8 @@ public class Library {
 
     public static String hentUrl(String url) throws IOException {
         System.out.println("Henter data fra " + url);
-        BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
+        URL realURL = new URL(url);
+        BufferedReader br = new BufferedReader(new InputStreamReader(realURL.openStream()));
         StringBuilder sb = new StringBuilder();
         String linje = br.readLine();
         while (linje != null) {
@@ -83,5 +84,4 @@ public class Library {
         }
         return sb.toString();
     }
-
 }

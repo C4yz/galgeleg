@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.example.galgeleg.GalgeController;
 import com.example.galgeleg.R;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 
 public class GalgelegGame extends AppCompatActivity{
@@ -32,7 +34,6 @@ public class GalgelegGame extends AppCompatActivity{
         setContentView( R.layout.activity_galgeleg_game);
 
         createButton();
-
         imageView = findViewById(R.id.imageView);
 
         Intent intent = getIntent();
@@ -99,6 +100,8 @@ public class GalgelegGame extends AppCompatActivity{
         }else{
             intent = new Intent(this, Player_has_lost.class);
         }
+
+        intent.putExtra( "Controller", controller );
         startActivity(intent);
     }
 }
