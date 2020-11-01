@@ -22,6 +22,7 @@ public class Player_has_lost extends AppCompatActivity implements View.OnClickLi
     TextView textView;
     Button playAgain;
     Button menu;
+    int choice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +48,21 @@ public class Player_has_lost extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
 
         if(v == playAgain){
-            this.galgeController.changeState(new Running(galgeController));
+            choice = 1;
+            try {
+                this.galgeController.startNewGame(choice);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Intent intent = new Intent(this,GalgelegGame.class);
             startActivity(intent);
         }else if(v == menu){
-            this.galgeController.changeState(new Initial(galgeController));
+            choice = 2;
+            try {
+                this.galgeController.startNewGame(choice);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }

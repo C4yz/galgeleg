@@ -13,13 +13,13 @@ import android.widget.TextView;
 
 import com.example.galgeleg.GalgeController;
 import com.example.galgeleg.R;
+import com.example.galgeleg.game_state.IGameState;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
 
 public class GalgelegGame extends AppCompatActivity{
 
-    private String theWordToGuess;
     private int choice;
     private String hiddenWord;
 
@@ -45,8 +45,6 @@ public class GalgelegGame extends AppCompatActivity{
             e.printStackTrace();
         }
 
-        theWordToGuess = controller.getTheWordToGuess();
-        controller.displayTheWord(theWordToGuess);
         hiddenWord = controller.getHiddenWord();
         textView = (TextView) findViewById(R.id.wordDisplay);
         textView.setText(hiddenWord);
@@ -97,6 +95,7 @@ public class GalgelegGame extends AppCompatActivity{
     public void gameOver(boolean state){
         if(state){
             intent = new Intent(this,Player_has_won.class);
+            intent.putExtra("numberOfTires", controller.getNumberOfTries());
         }else{
             intent = new Intent(this, Player_has_lost.class);
         }

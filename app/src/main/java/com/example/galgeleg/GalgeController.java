@@ -23,8 +23,6 @@ public class GalgeController implements Parcelable{
     private int numberOfTries;
     private int numberOfWrongLetters;
     private boolean lastLetterWasCorrect;
-    private boolean playerHasWon;
-    private boolean playerHasLost;
 
     IGameState iGameState;
     GalgelegGame game;
@@ -37,8 +35,6 @@ public class GalgeController implements Parcelable{
         numberOfTries = 0;
         usedCorrectLetters = "";
         hiddenWord = "";
-        playerHasLost = false;
-        playerHasWon = false;
         lastLetterWasCorrect = false;
     }
 
@@ -50,8 +46,6 @@ public class GalgeController implements Parcelable{
         numberOfTries = in.readInt();
         numberOfWrongLetters = in.readInt();
         lastLetterWasCorrect = in.readByte() != 0;
-        playerHasWon = in.readByte() != 0;
-        playerHasLost = in.readByte() != 0;
     }
 
     public static final Creator<GalgeController> CREATOR = new Creator<GalgeController>() {
@@ -67,7 +61,6 @@ public class GalgeController implements Parcelable{
     };
 
     public void startNewGame(int choice) throws Exception {
-        this.iGameState = new Running(this);
         this.iGameState.startNewGame(choice);
     }
 
@@ -147,21 +140,6 @@ public class GalgeController implements Parcelable{
         return numberOfWrongLetters;
     }
 
-    public void setPlayerHasWon(boolean playerHasWon) {
-        this.playerHasWon = playerHasWon;
-    }
-
-    public boolean getPlayerHasWon(){
-        return playerHasWon;
-    }
-
-    public void setPlayerHasLost(boolean playerHasLost) {
-        this.playerHasLost = playerHasLost;
-    }
-
-    public boolean getPlayerHasLost(){
-        return playerHasLost;
-    }
 
     public void setLastLetterWasCorrect(boolean lastLetterWasCorrect) {
         this.lastLetterWasCorrect = lastLetterWasCorrect;
@@ -185,7 +163,6 @@ public class GalgeController implements Parcelable{
         dest.writeInt( numberOfTries );
         dest.writeInt( numberOfWrongLetters );
         dest.writeByte( (byte) (lastLetterWasCorrect ? 1 : 0) );
-        dest.writeByte( (byte) (playerHasWon ? 1 : 0) );
-        dest.writeByte( (byte) (playerHasLost ? 1 : 0) );
+
     }
 }
