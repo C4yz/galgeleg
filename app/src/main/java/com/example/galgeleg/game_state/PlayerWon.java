@@ -2,7 +2,7 @@ package com.example.galgeleg.game_state;
 
 import java.io.IOException;
 
-public class playerLost implements IGameState{
+public class PlayerWon implements IGameState{
     @Override
     public void startNewGame(int choice) throws Exception {
 

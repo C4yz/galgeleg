@@ -1,4 +1,4 @@
-package com.example.galgeleg;
+package com.example.galgeleg.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.galgeleg.R;
+import com.example.galgeleg.activities.GalgelegGame;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button submitButton;
@@ -20,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView( R.layout.activity_main);
 
         submitButton = (Button)findViewById(R.id.submitButton);
         submitButton.setOnClickListener(this);
@@ -35,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        setContentView(R.layout.activity_galgeleg_game);
-
         intent = new Intent(getApplicationContext(), GalgelegGame.class);
         try{
             intent.putExtra("choices",(dropdown.getSelectedItemPosition()));

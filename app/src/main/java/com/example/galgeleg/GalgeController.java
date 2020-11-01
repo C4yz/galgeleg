@@ -1,12 +1,13 @@
 package com.example.galgeleg;
 
+import com.example.galgeleg.activities.GalgelegGame;
+import com.example.galgeleg.activities.Player_has_lost;
+import com.example.galgeleg.activities.Player_has_won;
 import com.example.galgeleg.game_state.IGameState;
+import com.example.galgeleg.game_state.Initial;
+import com.example.galgeleg.game_state.PlayerLost;
+import com.example.galgeleg.game_state.PlayerWon;
 import com.example.galgeleg.game_state.Running;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 
 public class GalgeController {
 
@@ -20,88 +21,53 @@ public class GalgeController {
     private boolean playerHasWon;
     private boolean playerHasLost;
 
-    Library library = new Library();
     IGameState iGameState;
+    GalgelegGame game;
 
-    public GalgeController(){
-        this.iGameState = new Running(this);
+    public GalgeController(GalgelegGame galgelegGame){
+        this.iGameState = new Initial(this);
+        this.game = galgelegGame;
         visibleWord = "";
         theWordToGuess = "";
         numberOfTries = 0;
         usedCorrectLetters = "";
         hiddenWord = "";
+        playerHasLost = false;
+        playerHasWon = false;
+        lastLetterWasCorrect = false;
     }
 
     public void startNewGame(int choice) throws Exception {
+        this.iGameState = new Running(this);
         this.iGameState.startNewGame(choice);
-        /*getTheWords(choice);
-        numberOfWrongLetters = 0;
-        playerHasWon = false;
-        playerHasLost = false;
-        if (Library.posibleWords.isEmpty()) throw new IllegalStateException("Listen over mulige ord er tom!");
-        theWordToGuess = Library.posibleWords.get(new Random().nextInt(Library.posibleWords.size()));
-        theWordToGuess = "hej";
-        System.out.println("Nyt spil - det skjulte ord er: "+ theWordToGuess);*/
     }
 
     public void getTheWords(int choice) throws Exception {
-
         this.iGameState.getTheWords(choice);
-
-        /*switch (choice){
-            case 0:
-                library.standartOrd();
-                break;
-            case 1:
-                library.hentOrdFraDr();
-                break;
-            case 2:
-                library.hentOrdFraRegneark("1");
-                break;
-            case 3:
-                library.hentOrdFraRegneark("2");
-                break;
-            case 4:
-                library.hentOrdFraRegneark("3");
-            default:
-                break;
-        }*/
     }
 
     public void displayTheWord(String wordToHide){
         this.iGameState.displayTheWord(wordToHide);
-        /*String hiddenWord = "";
-
-        for (int i = 0; i < wordToHide.length(); i++){
-            hiddenWord += "*";
-        }*/
     }
 
     public void updateWord(){
         this.iGameState.updateWord();
-        /*visibleWord = "";
-
-        for (char letter : theWordToGuess.toCharArray()) {
-            if(usedCorrectLetters.indexOf(letter) != -1){
-                visibleWord += letter;
-            }else{
-                visibleWord += "*";
-            }
-        }*/
     }
 
     public void guessedLetter(String guessedLetter){
         this.iGameState.guessedLetter(guessedLetter);
-        /*if(theWordToGuess.contains(guessedLetter)){
-            usedCorrectLetters += guessedLetter;
-        }else{
-            numberOfTries++;
-        }
-        updateWord();*/
     }
 
     public void changeState(IGameState gameState){
         this.iGameState = gameState;
+
+        if(this.iGameState instanceof PlayerWon){
+            this.game.gameOver(true);
+        }
+
+        if(this.iGameState instanceof PlayerLost){
+            this.game.gameOver(false);
+        }
     }
 
     public void setVisibleWord(String visibleWord) {

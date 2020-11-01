@@ -16,10 +16,7 @@ public class Running implements IGameState{
 
     @Override
     public void startNewGame(int choice) throws Exception {
-        /*int numberOfWrongLetters = this.galgeController.getNumberOfWrongLetters();
-        boolean playerHasWon = this.galgeController.getPlayerHasWon();
-        boolean playerHasLost = this.galgeController.getPlayerHasLost();*/
-        String theWordToGuess = this.galgeController.getTheWordToGuess();
+        String theWordToGuess;
 
         this.galgeController.getTheWords(choice);
         this.galgeController.setNumberOfWrongLetters(0);
@@ -27,7 +24,6 @@ public class Running implements IGameState{
         this.galgeController.setPlayerHasLost(false);
         if (Library.posibleWords.isEmpty()) throw new IllegalStateException("Listen over mulige ord er tom!");
         this.galgeController.setTheWordToGuess(theWordToGuess = Library.posibleWords.get(new Random().nextInt(Library.posibleWords.size())));
-        //theWordToGuess = "hej";
         System.out.println("Nyt spil - det skjulte ord er: "+ theWordToGuess);
     }
 
@@ -81,16 +77,24 @@ public class Running implements IGameState{
 
     @Override
     public void guessedLetter(String guessedLetter) {
-        //String theWordToGuess = this.galgeController.getTheWordToGuess();
         String usedCorrectLetters = this.galgeController.getUsedCorrectLetters();
-        //int numberOfTries = this.galgeController.getNumberOfTries();
+        int numberOfTries = this.galgeController.getNumberOfTries();
 
         if(this.galgeController.getTheWordToGuess().contains(guessedLetter)){
             usedCorrectLetters += guessedLetter;
             this.galgeController.setUsedCorrectLetters(usedCorrectLetters);
+            this.galgeController.setLastLetterWasCorrect(true);
+            this.galgeController.updateWord();
         }else{
-            this.galgeController.setNumberOfTries(+1);
+            numberOfTries++;
+            this.galgeController.setNumberOfTries(numberOfTries);
+            this.galgeController.setLastLetterWasCorrect(false);
         }
-        this.galgeController.updateWord();
+
+        if(this.galgeController.getNumberOfTries() == 6 && !this.galgeController.getLastLetterWasCorrect()){
+            this.galgeController.changeState(new PlayerLost(galgeController));
+        }else if(this.galgeController.getNumberOfTries() < 6 && !this.galgeController.getVisibleWord().contains("*")){
+            this.galgeController.changeState(new PlayerWon());
+        }
     }
 }
