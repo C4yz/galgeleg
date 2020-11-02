@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.galgeleg.R;
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button submitButton;
     Spinner dropdown;
     Intent intent;
+    String playerName;
+    EditText editText;
 
 
     @Override
@@ -27,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         submitButton = (Button)findViewById(R.id.submitButton);
         submitButton.setOnClickListener(this);
+
+        editText = findViewById(R.id.personName);
+
 
         String[] choices = {"Standart Ord","Ord Fra DR", "Lette ord Fra regneark", "Svære ord fra regneark", "Bogstavsord"};
         dropdown = findViewById(R.id.dropDown);
@@ -38,9 +45,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+
+        playerName = editText.getText().toString();
+
         intent = new Intent(getApplicationContext(), GalgelegGame.class);
         try{
             intent.putExtra("choices",(dropdown.getSelectedItemPosition()));
+            intent.putExtra("PlayerName",playerName);
             startActivity(intent);
         } catch (ActivityNotFoundException e){
             e.printStackTrace();

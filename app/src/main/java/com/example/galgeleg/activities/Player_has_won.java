@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.example.galgeleg.GalgeController;
 import com.example.galgeleg.R;
 
+import java.util.ArrayList;
+
 public class Player_has_won extends AppCompatActivity implements View.OnClickListener {
 
     GalgeController galgeController;
@@ -20,27 +22,34 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
     Button menu;
     int choice;
     int numberOfTries;
-    int tempNumberOfTries;
-    TextView scoreCounter;
+    int bestNumberOfTries;
+    TextView highScoreCounter;
+    TextView yourScoreCounter;
+    String playerName;
+    ArrayList<String> highScoreList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_player_has_won );
 
-        scoreCounter = findViewById(R.id.scoreCounter);
+        highScoreCounter = findViewById(R.id.highScoreCounter);
+        yourScoreCounter = findViewById(R.id.yourScoreCounter);
 
         Intent i = getIntent();
 
         galgeController = i.getParcelableExtra( "Controller" );
         numberOfTries = i.getIntExtra("numberOfTires",0);
+        playerName = i.getStringExtra("PLayerName");
+
+        yourScoreCounter.setText("Your Score: " + numberOfTries);
 
         SharedPreferences myScore = getSharedPreferences("highScore", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = myScore.edit();
         editor.putInt( "score", numberOfTries );
         editor.commit();
 
-        //scoreCounter.setText("High score : " + numberOfTries );
+        highScoreCounter.setText("High score : " + numberOfTries );
 
         playAgain = findViewById(R.id.playerWonPlayAgain);
         menu = findViewById(R.id.playerWonMenu);
@@ -78,6 +87,6 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
     public void loadHighScore(){
         SharedPreferences load = this.getSharedPreferences("highScore", Context.MODE_PRIVATE);
         numberOfTries = load.getInt("score", 0);
-        scoreCounter.setText("High score : " + numberOfTries );
+        highScoreCounter.setText("High score : " + numberOfTries );
     }
 }

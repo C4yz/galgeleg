@@ -5,7 +5,7 @@ import com.example.galgeleg.Library;
 
 import java.util.Random;
 
-public class Initial implements IGameState {
+public class Initial extends Adapter {
 
     GalgeController galgeController;
     Library library = new Library();
@@ -64,13 +64,4 @@ public class Initial implements IGameState {
         this.galgeController.setVisibleWord(hiddenWord);
     }
 
-    @Override
-    public void updateWord() {
-
-    }
-
-    @Override
-    public void guessedLetter(String guessedLetter) {
-
-    }
 }

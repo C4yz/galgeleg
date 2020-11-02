@@ -23,6 +23,7 @@ public class GalgelegGame extends AppCompatActivity{
 
     private int choice;
     private String hiddenWord;
+    private String playerName;
 
     GalgeController controller = new GalgeController(this);
     TextView textView;
@@ -42,6 +43,7 @@ public class GalgelegGame extends AppCompatActivity{
         Intent intent = getIntent();
         choice = intent.getIntExtra("choices",0);
         textView = findViewById(R.id.wordDisplay);
+        playerName = intent.getStringExtra("PlayerName");
 
         bgThread.execute(()->{
             try {
@@ -106,6 +108,7 @@ public class GalgelegGame extends AppCompatActivity{
         if(state){
             intent = new Intent(this,Player_has_won.class);
             intent.putExtra("numberOfTires", controller.getNumberOfFailedTries());
+            intent.putExtra("PlayerName",playerName);
         }else{
             intent = new Intent(this, Player_has_lost.class);
         }
