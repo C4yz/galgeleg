@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -13,10 +14,10 @@ import android.widget.TextView;
 
 import com.example.galgeleg.GalgeController;
 import com.example.galgeleg.R;
-import com.example.galgeleg.game_state.IGameState;
 
-import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class GalgelegGame extends AppCompatActivity{
 
@@ -27,6 +28,8 @@ public class GalgelegGame extends AppCompatActivity{
     TextView textView;
     ImageView imageView;
     Intent intent;
+    Executor bgThread = Executors.newSingleThreadExecutor();
+    Handler uiHandler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +41,23 @@ public class GalgelegGame extends AppCompatActivity{
 
         Intent intent = getIntent();
         choice = intent.getIntExtra("choices",0);
+        textView = findViewById(R.id.wordDisplay);
 
-        try {
-            controller.startNewGame(choice);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        bgThread.execute(()->{
+            try {
+                controller.startNewGame(choice);
+                uiHandler.post(()->{
+                    hiddenWord = controller.getHiddenWord();
+                    textView.setText(hiddenWord);
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                uiHandler.post(()->{
+                   textView.setText("Der skete en fejl ved hentning");
+                });
+            }
+        });
 
-        hiddenWord = controller.getHiddenWord();
-        textView = (TextView) findViewById(R.id.wordDisplay);
-        textView.setText(hiddenWord);
     }
 
     public void createButton(){
@@ -81,7 +91,7 @@ public class GalgelegGame extends AppCompatActivity{
 
         textView.setText(visibleWord);
 
-        int numberOfTires = controller.getNumberOfTries();
+        int numberOfTires = controller.getNumberOfFailedTries();
         if(numberOfTires != 0){
             try {
                 Field field = R.drawable.class.getDeclaredField("forkert"+Integer.toString(numberOfTires));
@@ -95,7 +105,7 @@ public class GalgelegGame extends AppCompatActivity{
     public void gameOver(boolean state){
         if(state){
             intent = new Intent(this,Player_has_won.class);
-            intent.putExtra("numberOfTires", controller.getNumberOfTries());
+            intent.putExtra("numberOfTires", controller.getNumberOfFailedTries());
         }else{
             intent = new Intent(this, Player_has_lost.class);
         }

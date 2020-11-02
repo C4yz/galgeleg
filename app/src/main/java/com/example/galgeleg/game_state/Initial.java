@@ -30,6 +30,8 @@ public class Initial implements IGameState {
 
     @Override
     public void getTheWords(int choice) throws Exception {
+
+
         switch (choice){
             case 0:
                 library.standartOrd();

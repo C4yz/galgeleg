@@ -4,15 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.example.galgeleg.activities.GalgelegGame;
-import com.example.galgeleg.activities.Player_has_lost;
-import com.example.galgeleg.activities.Player_has_won;
 import com.example.galgeleg.game_state.IGameState;
 import com.example.galgeleg.game_state.Initial;
 import com.example.galgeleg.game_state.PlayerLost;
 import com.example.galgeleg.game_state.PlayerWon;
-import com.example.galgeleg.game_state.Running;
-
-import java.io.Serializable;
 
 public class GalgeController implements Parcelable{
 
@@ -20,7 +15,7 @@ public class GalgeController implements Parcelable{
     private String usedCorrectLetters;
     private String visibleWord;
     private String hiddenWord;
-    private int numberOfTries;
+    private int numberOfFailedTries;
     private int numberOfWrongLetters;
     private boolean lastLetterWasCorrect;
 
@@ -32,7 +27,7 @@ public class GalgeController implements Parcelable{
         this.game = galgelegGame;
         visibleWord = "";
         theWordToGuess = "";
-        numberOfTries = 0;
+        numberOfFailedTries = 0;
         usedCorrectLetters = "";
         hiddenWord = "";
         lastLetterWasCorrect = false;
@@ -43,7 +38,7 @@ public class GalgeController implements Parcelable{
         usedCorrectLetters = in.readString();
         visibleWord = in.readString();
         hiddenWord = in.readString();
-        numberOfTries = in.readInt();
+        numberOfFailedTries = in.readInt();
         numberOfWrongLetters = in.readInt();
         lastLetterWasCorrect = in.readByte() != 0;
     }
@@ -124,12 +119,12 @@ public class GalgeController implements Parcelable{
         return hiddenWord;
     }
 
-    public void setNumberOfTries(int numberOfTries) {
-        this.numberOfTries = numberOfTries;
+    public void setNumberOfFailedTries(int numberOfFailedTries) {
+        this.numberOfFailedTries = numberOfFailedTries;
     }
 
-    public int getNumberOfTries(){
-        return numberOfTries;
+    public int getNumberOfFailedTries(){
+        return numberOfFailedTries;
     }
 
     public void setNumberOfWrongLetters(int numberOfWrongLetters) {
@@ -160,7 +155,7 @@ public class GalgeController implements Parcelable{
         dest.writeString( usedCorrectLetters );
         dest.writeString( visibleWord );
         dest.writeString( hiddenWord );
-        dest.writeInt( numberOfTries );
+        dest.writeInt(numberOfFailedTries);
         dest.writeInt( numberOfWrongLetters );
         dest.writeByte( (byte) (lastLetterWasCorrect ? 1 : 0) );
 

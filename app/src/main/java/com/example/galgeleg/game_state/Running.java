@@ -3,8 +3,6 @@ package com.example.galgeleg.game_state;
 import com.example.galgeleg.GalgeController;
 import com.example.galgeleg.Library;
 
-import java.util.Random;
-
 public class Running implements IGameState{
 
     GalgeController galgeController;
@@ -49,7 +47,7 @@ public class Running implements IGameState{
     @Override
     public void guessedLetter(String guessedLetter) {
         String usedCorrectLetters = this.galgeController.getUsedCorrectLetters();
-        int numberOfTries = this.galgeController.getNumberOfTries();
+        int numberOfTries = this.galgeController.getNumberOfFailedTries();
 
         if(this.galgeController.getTheWordToGuess().contains(guessedLetter)){
             usedCorrectLetters += guessedLetter;
@@ -58,15 +56,15 @@ public class Running implements IGameState{
             this.galgeController.updateWord();
         }else{
             numberOfTries++;
-            this.galgeController.setNumberOfTries(numberOfTries);
+            this.galgeController.setNumberOfFailedTries(numberOfTries);
             this.galgeController.setLastLetterWasCorrect(false);
         }
 
         String visibleWord = this.galgeController.getVisibleWord();
 
-        if(this.galgeController.getNumberOfTries() == 6 && !this.galgeController.getLastLetterWasCorrect()){
+        if(this.galgeController.getNumberOfFailedTries() == 6 && !this.galgeController.getLastLetterWasCorrect()){
             this.galgeController.changeState(new PlayerLost(galgeController));
-        }else if(this.galgeController.getNumberOfTries() < 6 && !visibleWord.contains("*")){
+        }else if(this.galgeController.getNumberOfFailedTries() < 6 && !visibleWord.contains("*")){
             this.galgeController.changeState(new PlayerWon(galgeController));
         }
     }
