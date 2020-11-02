@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.example.galgeleg.GalgeController;
 import com.example.galgeleg.R;
-import com.example.galgeleg.game_state.Initial;
-import com.example.galgeleg.game_state.Running;
 
 public class Player_has_lost extends AppCompatActivity implements View.OnClickListener {
 

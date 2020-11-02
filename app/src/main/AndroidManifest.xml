@@ -11,10 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.Player_has_lost"></activity>
-        <activity android:name=".activities.Player_has_won" />
-        <activity android:name=".activities.GalgelegGame" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.Player_has_lost"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.Player_has_won"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.GalgelegGame"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
