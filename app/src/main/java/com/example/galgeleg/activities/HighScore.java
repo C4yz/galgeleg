@@ -1,6 +1,8 @@
 package com.example.galgeleg.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.galgeleg.GalgeController;
+import com.example.galgeleg.MyAdapter;
 import com.example.galgeleg.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,6 +39,7 @@ public class HighScore extends AppCompatActivity {
         playerName = intent.getStringExtra("PlayerName");
 
         insertIntoList(playerName,numberOfTries);
+
         saveList();
 
     }
@@ -65,5 +69,14 @@ public class HighScore extends AppCompatActivity {
         String data = playerScore + ", " + playerName;
 
         highScoreList.add(data);
+
+        initRecyclerView();
+    }
+
+    public void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        MyAdapter adapter = new MyAdapter(highScoreList,this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
