@@ -41,18 +41,9 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
         numberOfTries = i.getIntExtra("numberOfTires",0);
         playerName = i.getStringExtra("PLayerName");
 
-        yourScoreCounter.setText("Your Score: " + numberOfTries);
-
-        SharedPreferences myScore = getSharedPreferences("highScore", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = myScore.edit();
-        editor.putInt( "score", numberOfTries );
-        editor.commit();
-
-        highScoreCounter.setText("High score : " + numberOfTries );
-
         playAgain = findViewById(R.id.playerWonPlayAgain);
         menu = findViewById(R.id.playerWonMenu);
-        highList.findViewById(R.id.highScoreButton);
+        highList = findViewById(R.id.highScoreButton);
 
         playAgain.setOnClickListener(this);
         menu.setOnClickListener(this);
