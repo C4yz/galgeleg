@@ -20,13 +20,12 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
     GalgeController galgeController;
     Button playAgain;
     Button menu;
+    Button highList;
     int choice;
     int numberOfTries;
-    int bestNumberOfTries;
     TextView highScoreCounter;
     TextView yourScoreCounter;
     String playerName;
-    ArrayList<String> highScoreList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +52,11 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
 
         playAgain = findViewById(R.id.playerWonPlayAgain);
         menu = findViewById(R.id.playerWonMenu);
+        highList.findViewById(R.id.highScoreButton);
 
         playAgain.setOnClickListener(this);
         menu.setOnClickListener(this);
+        highList.setOnClickListener(this);
 
         loadHighScore();
     }
@@ -80,6 +81,11 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
                 e.printStackTrace();
             }
             Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }else if(v == highList){
+            Intent intent = new Intent(this, HighScore.class);
+            intent.putExtra("PlayerName",playerName);
+            intent.putExtra("NumberOfTries",numberOfTries);
             startActivity(intent);
         }
     }
