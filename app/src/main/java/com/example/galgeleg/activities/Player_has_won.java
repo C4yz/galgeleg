@@ -76,5 +76,4 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
             startActivity(intent);
         }
     }
-
 }

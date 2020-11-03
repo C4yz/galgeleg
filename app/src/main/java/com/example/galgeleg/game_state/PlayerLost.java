@@ -7,7 +7,7 @@ import com.example.galgeleg.activities.Player_has_lost;
 import java.io.IOException;
 import java.util.Random;
 
-public class PlayerLost implements IGameState{
+public class PlayerLost extends Adapter{
 
     GalgeController galgeController;
 
@@ -26,23 +26,4 @@ public class PlayerLost implements IGameState{
         Library.posibleWords.clear();
     }
 
-    @Override
-    public void getTheWords(int choice) throws Exception {
-
-    }
-
-    @Override
-    public void displayTheWord(String wordToHide) {
-
-    }
-
-    @Override
-    public void updateWord() {
-
-    }
-
-    @Override
-    public void guessedLetter(String guessedLetter) {
-
-    }
 }

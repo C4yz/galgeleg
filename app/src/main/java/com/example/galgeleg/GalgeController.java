@@ -131,11 +131,6 @@ public class GalgeController implements Parcelable{
         this.numberOfWrongLetters = numberOfWrongLetters;
     }
 
-    public int getNumberOfWrongLetters(){
-        return numberOfWrongLetters;
-    }
-
-
     public void setLastLetterWasCorrect(boolean lastLetterWasCorrect) {
         this.lastLetterWasCorrect = lastLetterWasCorrect;
     }

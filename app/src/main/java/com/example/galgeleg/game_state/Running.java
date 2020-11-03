@@ -3,29 +3,12 @@ package com.example.galgeleg.game_state;
 import com.example.galgeleg.GalgeController;
 import com.example.galgeleg.Library;
 
-public class Running implements IGameState{
+public class Running extends Adapter{
 
     GalgeController galgeController;
-    Library library = new Library();
 
     public Running(GalgeController galgeController){
         this.galgeController = galgeController;
-    }
-
-    @Override
-    public void startNewGame(int choice) throws Exception {
-
-    }
-
-
-    @Override
-    public void getTheWords(int choice) throws Exception {
-
-    }
-
-    @Override
-    public void displayTheWord(String wordToHide) {
-
     }
 
     @Override
