@@ -8,52 +8,51 @@ import com.example.galgeleg.game_state.IGameState;
 import com.example.galgeleg.game_state.Initial;
 import com.example.galgeleg.game_state.PlayerLost;
 import com.example.galgeleg.game_state.PlayerWon;
+import com.google.gson.internal.$Gson$Preconditions;
 
-public class GalgeController implements Parcelable{
+public class GalgeController{
 
-    private String theWordToGuess;
-    private String usedCorrectLetters;
-    private String visibleWord;
-    private String hiddenWord;
-    private int numberOfFailedTries;
-    private int numberOfWrongLetters;
-    private boolean lastLetterWasCorrect;
+    private static volatile GalgeController controller;
+    private static final Object object = new Object();
 
-    IGameState iGameState;
-    GalgelegGame game;
+    String theWordToGuess = "";
+    String usedCorrectLetters = "";
+    String visibleWord = "";
+    String hiddenWord = "";
+    int numberOfFailedTries = 0;
+    int numberOfWrongLetters = 0;
+    boolean lastLetterWasCorrect = false;
 
-    public GalgeController(GalgelegGame galgelegGame){
-        this.iGameState = new Initial(this);
-        this.game = galgelegGame;
+    private IGameState iGameState;
+    private GalgelegGame game;
+
+    private GalgeController(){
+        iGameState = new Initial();
+        game = new GalgelegGame();
+        /*
+        GalgelegGame galgelegGame
+        game = galgelegGame;
         visibleWord = "";
         theWordToGuess = "";
         numberOfFailedTries = 0;
         usedCorrectLetters = "";
         hiddenWord = "";
-        lastLetterWasCorrect = false;
+        lastLetterWasCorrect = false;*/
     }
 
-    protected GalgeController(Parcel in) {
-        theWordToGuess = in.readString();
-        usedCorrectLetters = in.readString();
-        visibleWord = in.readString();
-        hiddenWord = in.readString();
-        numberOfFailedTries = in.readInt();
-        numberOfWrongLetters = in.readInt();
-        lastLetterWasCorrect = in.readByte() != 0;
+    public static GalgeController getInstance(){
+
+        if(controller != null){
+            return controller;
+        }
+
+        synchronized (object){
+            if(controller == null){
+                controller = new GalgeController();
+            }
+            return controller;
+        }
     }
-
-    public static final Creator<GalgeController> CREATOR = new Creator<GalgeController>() {
-        @Override
-        public GalgeController createFromParcel(Parcel in) {
-            return new GalgeController( in );
-        }
-
-        @Override
-        public GalgeController[] newArray(int size) {
-            return new GalgeController[size];
-        }
-    };
 
     public void startNewGame(int choice) throws Exception {
         this.iGameState.startNewGame(choice);
@@ -144,20 +143,4 @@ public class GalgeController implements Parcelable{
         return lastLetterWasCorrect;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString( theWordToGuess );
-        dest.writeString( usedCorrectLetters );
-        dest.writeString( visibleWord );
-        dest.writeString( hiddenWord );
-        dest.writeInt(numberOfFailedTries);
-        dest.writeInt( numberOfWrongLetters );
-        dest.writeByte( (byte) (lastLetterWasCorrect ? 1 : 0) );
-
-    }
 }

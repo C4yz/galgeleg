@@ -7,27 +7,25 @@ import java.util.Random;
 
 public class Initial extends Adapter {
 
-    GalgeController galgeController;
+    GalgeController  galgeController = GalgeController.getInstance();
     Library library = new Library();
 
-    public Initial(GalgeController galgeController) {
-        this.galgeController = galgeController;
+    public Initial() {
+
     }
 
     @Override
     public void startNewGame(int choice) throws Exception {
         String theWordToGuess;
 
-        this.galgeController.getTheWords(choice);
-        this.galgeController.setNumberOfWrongLetters(0);
+        galgeController.getTheWords(choice);
+        galgeController.setNumberOfWrongLetters(0);
         if (Library.posibleWords.isEmpty()) throw new IllegalStateException("Listen over mulige ord er tom!");
         theWordToGuess = Library.posibleWords.get(new Random().nextInt(Library.posibleWords.size()));
-        this.galgeController.setTheWordToGuess(theWordToGuess);
-        this.galgeController.displayTheWord(theWordToGuess);
+        galgeController.setTheWordToGuess(theWordToGuess);
+        galgeController.displayTheWord(theWordToGuess);
 
-        library.printPossibleWords(Library.posibleWords);
-
-        this.galgeController.changeState(new Running(galgeController));
+        galgeController.changeState(new Running());
     }
 
     @Override

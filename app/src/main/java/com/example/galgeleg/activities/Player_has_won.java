@@ -2,20 +2,13 @@ package com.example.galgeleg.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.galgeleg.GalgeController;
 import com.example.galgeleg.R;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 public class Player_has_won extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,7 +27,7 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
 
         Intent i = getIntent();
 
-        galgeController = i.getParcelableExtra( "Controller" );
+        galgeController = GalgeController.getInstance();
         numberOfTries = i.getIntExtra("numberOfTires",0);
         playerName = i.getStringExtra("PlayerName");
 

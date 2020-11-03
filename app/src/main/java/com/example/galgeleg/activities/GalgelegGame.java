@@ -22,10 +22,11 @@ import java.util.concurrent.Executors;
 public class GalgelegGame extends AppCompatActivity {
 
     private int choice;
+    private int numberOfTries;
     private String hiddenWord;
     private String playerName;
 
-    GalgeController controller = new GalgeController(this);
+    GalgeController controller = GalgeController.getInstance();
     TextView textView;
     ImageView imageView;
     Intent intent;
@@ -105,7 +106,7 @@ public class GalgelegGame extends AppCompatActivity {
     }
 
     public void gameOver(boolean state){
-        int numberOfTries = controller.getNumberOfFailedTries();
+        numberOfTries = controller.getNumberOfFailedTries();
 
         if(state){
             intent = new Intent(this,Player_has_won.class);
@@ -114,8 +115,6 @@ public class GalgelegGame extends AppCompatActivity {
         }else{
             intent = new Intent(this, Player_has_lost.class);
         }
-
-        intent.putExtra( "Controller", controller );
         startActivity(intent);
     }
 }

@@ -1,15 +1,13 @@
 package com.example.galgeleg.game_state;
 
 import com.example.galgeleg.GalgeController;
-import com.example.galgeleg.Library;
 
 public class Running implements IGameState{
 
-    GalgeController galgeController;
-    Library library = new Library();
+    GalgeController galgeController = GalgeController.getInstance();
 
-    public Running(GalgeController galgeController){
-        this.galgeController = galgeController;
+    public Running(){
+
     }
 
     @Override
@@ -63,9 +61,9 @@ public class Running implements IGameState{
         String visibleWord = this.galgeController.getVisibleWord();
 
         if(this.galgeController.getNumberOfFailedTries() == 6 && !this.galgeController.getLastLetterWasCorrect()){
-            this.galgeController.changeState(new PlayerLost(galgeController));
+            this.galgeController.changeState(new PlayerLost());
         }else if(this.galgeController.getNumberOfFailedTries() < 6 && !visibleWord.contains("*")){
-            this.galgeController.changeState(new PlayerWon(galgeController));
+            this.galgeController.changeState(new PlayerWon());
         }
     }
 }
