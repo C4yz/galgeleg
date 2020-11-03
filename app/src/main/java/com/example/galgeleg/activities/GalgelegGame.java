@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class GalgelegGame extends AppCompatActivity{
+public class GalgelegGame extends AppCompatActivity {
 
     private int choice;
     private String hiddenWord;

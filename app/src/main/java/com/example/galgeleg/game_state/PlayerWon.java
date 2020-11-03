@@ -21,6 +21,8 @@ public class PlayerWon implements IGameState{
         }else if(choice == 2){
             galgeController.changeState(new Initial(this.galgeController));
         }
+
+        Library.posibleWords.clear();
     }
 
     @Override

@@ -25,17 +25,12 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
     Button highList;
     int choice;
     int numberOfTries;
-    TextView highScoreCounter;
-    TextView yourScoreCounter;
     String playerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_player_has_won );
-
-        highScoreCounter = findViewById(R.id.highScoreCounter);
-        yourScoreCounter = findViewById(R.id.yourScoreCounter);
 
         Intent i = getIntent();
 
@@ -51,7 +46,6 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
         menu.setOnClickListener(this);
         highList.setOnClickListener(this);
 
-        //loadHighScore();
     }
 
     @Override
@@ -83,9 +77,4 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void loadHighScore(){
-        SharedPreferences load = this.getSharedPreferences("highScore", Context.MODE_PRIVATE);
-        numberOfTries = load.getInt("score", 0);
-        highScoreCounter.setText("High score : " + numberOfTries );
-    }
 }

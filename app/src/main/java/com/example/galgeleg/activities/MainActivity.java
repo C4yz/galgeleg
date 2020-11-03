@@ -18,6 +18,7 @@ import com.example.galgeleg.activities.GalgelegGame;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button submitButton;
+    Button highScoreList;
     Spinner dropdown;
     Intent intent;
     String playerName;
@@ -29,8 +30,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_main);
 
+        highScoreList = findViewById(R.id.mainHighScoreList);
         submitButton = (Button)findViewById(R.id.submitButton);
+
         submitButton.setOnClickListener(this);
+        highScoreList.setOnClickListener(this);
+
+
 
         editText = findViewById(R.id.personName);
 
@@ -46,15 +52,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-        playerName = editText.getText().toString();
+        if(view == submitButton){
+            playerName = editText.getText().toString();
 
-        intent = new Intent(getApplicationContext(), GalgelegGame.class);
-        try{
-            intent.putExtra("choices",(dropdown.getSelectedItemPosition()));
-            intent.putExtra("PlayerName",playerName);
+            intent = new Intent(getApplicationContext(), GalgelegGame.class);
+            try{
+                intent.putExtra("choices",(dropdown.getSelectedItemPosition()));
+                intent.putExtra("PlayerName",playerName);
+                startActivity(intent);
+            } catch (ActivityNotFoundException e){
+                e.printStackTrace();
+            }
+        }else if(view == highScoreList){
+            Intent intent = new Intent(this,HighScore.class);
+            intent.putExtra("mainActivity",0);
             startActivity(intent);
-        } catch (ActivityNotFoundException e){
-            e.printStackTrace();
         }
+
     }
 }

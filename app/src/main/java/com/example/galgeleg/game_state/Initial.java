@@ -25,6 +25,8 @@ public class Initial extends Adapter {
         this.galgeController.setTheWordToGuess(theWordToGuess);
         this.galgeController.displayTheWord(theWordToGuess);
 
+        library.printPossibleWords(Library.posibleWords);
+
         this.galgeController.changeState(new Running(galgeController));
     }
 

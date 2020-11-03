@@ -84,4 +84,13 @@ public class Library {
         }
         return sb.toString();
     }
+
+    public void printPossibleWords(ArrayList<String> list){
+
+        for (String word: list) {
+            System.out.println("");
+            System.out.println(word);
+            System.out.println("");
+        }
+    }
 }

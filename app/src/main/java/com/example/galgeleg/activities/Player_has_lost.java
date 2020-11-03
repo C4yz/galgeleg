@@ -33,7 +33,7 @@ public class Player_has_lost extends AppCompatActivity implements View.OnClickLi
 
         theWordToGuess = this.galgeController.getTheWordToGuess();
         textView = (TextView) findViewById(R.id.playerLostTheWord);
-        textView.setText("Du tabte dit ordet der skulle gættes var:"+ theWordToGuess);
+        textView.setText("Du tabte dit ordet der skulle gættes var: "+ theWordToGuess);
 
         playAgain = findViewById( R.id.playerLostPlayAgain );
         menu = findViewById(R.id.playerLostMenu);
