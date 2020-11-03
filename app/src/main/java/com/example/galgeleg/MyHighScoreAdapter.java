@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class MyHighScoreAdapter extends RecyclerView.Adapter<MyHighScoreAdapter.MyViewHolder> {
 
     private ArrayList<String> highScoreList;
     private Context context;
 
-    public MyAdapter(ArrayList<String> highScoreList, Context context) {
+    public MyHighScoreAdapter(ArrayList<String> highScoreList, Context context) {
         this.highScoreList = highScoreList;
         this.context = context;
     }
@@ -33,7 +33,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.playerName.setText(highScoreList.get(position));
+
+        String line = highScoreList.get(position);
+
+        String[] tokens = line.split(", ");
+
+        holder.playerName.setText(tokens[0]);
+
+        holder.playerScore.setText(tokens[1]);
 
         holder.relativeLayout.setOnClickListener( new View.OnClickListener() {
             @Override

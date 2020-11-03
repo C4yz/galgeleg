@@ -7,17 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.example.galgeleg.GalgeController;
-import com.example.galgeleg.MyAdapter;
+import com.example.galgeleg.MyHighScoreAdapter;
 import com.example.galgeleg.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.FormatFlagsConversionMismatchException;
+import java.util.Collections;
 
 public class HighScore extends AppCompatActivity {
 
@@ -39,6 +38,8 @@ public class HighScore extends AppCompatActivity {
         playerName = intent.getStringExtra("PlayerName");
 
         insertIntoList(playerName,numberOfTries);
+
+        Collections.sort(highScoreList);
 
         saveList();
 
@@ -75,7 +76,7 @@ public class HighScore extends AppCompatActivity {
 
     public void initRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        MyAdapter adapter = new MyAdapter(highScoreList,this);
+        MyHighScoreAdapter adapter = new MyHighScoreAdapter(highScoreList,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

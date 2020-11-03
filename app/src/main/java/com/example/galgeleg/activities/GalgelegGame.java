@@ -105,9 +105,11 @@ public class GalgelegGame extends AppCompatActivity{
     }
 
     public void gameOver(boolean state){
+        int numberOfTries = controller.getNumberOfFailedTries();
+
         if(state){
             intent = new Intent(this,Player_has_won.class);
-            intent.putExtra("numberOfTires", controller.getNumberOfFailedTries());
+            intent.putExtra("numberOfTires", numberOfTries);
             intent.putExtra("PlayerName",playerName);
         }else{
             intent = new Intent(this, Player_has_lost.class);

@@ -14,6 +14,8 @@ import com.example.galgeleg.GalgeController;
 import com.example.galgeleg.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Player_has_won extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,7 +41,7 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
 
         galgeController = i.getParcelableExtra( "Controller" );
         numberOfTries = i.getIntExtra("numberOfTires",0);
-        playerName = i.getStringExtra("PLayerName");
+        playerName = i.getStringExtra("PlayerName");
 
         playAgain = findViewById(R.id.playerWonPlayAgain);
         menu = findViewById(R.id.playerWonMenu);
@@ -49,7 +51,7 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
         menu.setOnClickListener(this);
         highList.setOnClickListener(this);
 
-        loadHighScore();
+        //loadHighScore();
     }
 
     @Override
