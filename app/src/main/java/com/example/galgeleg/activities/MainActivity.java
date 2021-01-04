@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(view == submitButton){
             playerName = editText.getText().toString();
 
-            intent = new Intent(getApplicationContext(), GalgelegGame.class);
+            intent = new Intent(this, GalgelegGame.class);
             try{
                 intent.putExtra("choices",(dropdown.getSelectedItemPosition()));
                 intent.putExtra("PlayerName",playerName);

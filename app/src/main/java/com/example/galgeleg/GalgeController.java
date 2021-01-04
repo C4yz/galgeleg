@@ -23,12 +23,11 @@ public class GalgeController{
     int numberOfWrongLetters = 0;
     boolean lastLetterWasCorrect = false;
 
-    private IGameState iGameState;
-    private GalgelegGame game;
+    private static IGameState iGameState;
+    private static GalgelegGame game;
 
     private GalgeController(){
-        iGameState = new Initial();
-        game = new GalgelegGame();
+
         /*
         GalgelegGame galgelegGame
         game = galgelegGame;
@@ -40,18 +39,19 @@ public class GalgeController{
         lastLetterWasCorrect = false;*/
     }
 
+    private static void init(){
+        iGameState = new Initial();
+        game = new GalgelegGame();
+    }
+
     public static GalgeController getInstance(){
 
-        if(controller != null){
-            return controller;
+        if(controller == null){
+            controller = new GalgeController();
+            init();
         }
 
-        synchronized (object){
-            if(controller == null){
-                controller = new GalgeController();
-            }
-            return controller;
-        }
+        return controller;
     }
 
     public void startNewGame(int choice) throws Exception {
