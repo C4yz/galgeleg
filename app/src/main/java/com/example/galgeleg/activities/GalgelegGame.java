@@ -2,6 +2,9 @@ package com.example.galgeleg.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -115,7 +118,7 @@ public class GalgelegGame extends AppCompatActivity {
             intent = new Intent(this, Player_has_lost.class);
         }
 
-        intent.putExtra( "Controller", controller );
+        intent.putExtra( "Controller", (Parcelable) controller );
         startActivity(intent);
     }
 }

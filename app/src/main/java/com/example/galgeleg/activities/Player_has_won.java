@@ -59,7 +59,9 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
                 e.printStackTrace();
             }
             Intent intent = new Intent(this,GalgelegGame.class);
+            intent.putExtra("PlayerName",playerName);
             startActivity(intent);
+
         }else if(v == menu){
             choice = 2;
             try {

@@ -20,6 +20,7 @@ public class Player_has_lost extends AppCompatActivity implements View.OnClickLi
     TextView textView;
     Button playAgain;
     Button menu;
+    String playerName;
     int choice;
 
     @Override
@@ -34,6 +35,7 @@ public class Player_has_lost extends AppCompatActivity implements View.OnClickLi
         theWordToGuess = this.galgeController.getTheWordToGuess();
         textView = (TextView) findViewById(R.id.playerLostTheWord);
         textView.setText("Du tabte dit ordet der skulle gættes var: "+ theWordToGuess);
+        playerName = i.getStringExtra("PlayerName");
 
         playAgain = findViewById( R.id.playerLostPlayAgain );
         menu = findViewById(R.id.playerLostMenu);
@@ -53,6 +55,7 @@ public class Player_has_lost extends AppCompatActivity implements View.OnClickLi
                 e.printStackTrace();
             }
             Intent intent = new Intent(this,GalgelegGame.class);
+            intent.putExtra("PlayerName",playerName);
             startActivity(intent);
         }else if(v == menu){
             choice = 2;
@@ -64,6 +67,5 @@ public class Player_has_lost extends AppCompatActivity implements View.OnClickLi
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
-
     }
 }
