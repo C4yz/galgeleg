@@ -45,7 +45,6 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
         playAgain.setOnClickListener(this);
         menu.setOnClickListener(this);
         highList.setOnClickListener(this);
-
     }
 
     @Override
