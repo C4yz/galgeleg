@@ -28,6 +28,8 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
     int numberOfTries;
     String playerName;
 
+    MyObj myObj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -35,7 +37,7 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
 
         Intent i = getIntent();
 
-        galgeController = (GalgeController) i.getSerializableExtra( "Controller" );
+        myObj = (MyObj) i.getSerializableExtra( "Controller" );
         numberOfTries = i.getIntExtra("numberOfTires",0);
         playerName = i.getStringExtra("PlayerName");
 

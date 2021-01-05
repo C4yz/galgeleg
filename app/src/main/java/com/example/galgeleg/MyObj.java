@@ -9,6 +9,7 @@ public class MyObj implements Serializable {
     String name;
     int number;
     String something;
+    GalgelegGame galgelegGame = new GalgelegGame();
 
     public MyObj() {
         name = "Thomas";
