@@ -2,7 +2,6 @@ package com.example.galgeleg.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Parcel;
 import android.os.Parcelable;
 
 import android.content.Intent;
@@ -16,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.galgeleg.GalgeController;
+import com.example.galgeleg.LoadingDialog;
 import com.example.galgeleg.R;
 
 import java.lang.reflect.Field;
@@ -35,10 +35,14 @@ public class GalgelegGame extends AppCompatActivity {
     Executor bgThread = Executors.newSingleThreadExecutor();
     Handler uiHandler = new Handler(Looper.getMainLooper());
 
+    LoadingDialog loadingDialog = new LoadingDialog(GalgelegGame.this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_galgeleg_game);
+
+        loadingDialog.startLoadingDialog();
 
         createButton();
         imageView = findViewById(R.id.imageView);
@@ -63,6 +67,13 @@ public class GalgelegGame extends AppCompatActivity {
             }
         });
 
+        Handler handler = new Handler();
+        handler.postDelayed( new Runnable() {
+            @Override
+            public void run() {
+                loadingDialog.dismissDialog();
+            }
+        }, 2000 );
     }
 
     public void createButton(){
@@ -118,7 +129,8 @@ public class GalgelegGame extends AppCompatActivity {
             intent = new Intent(this, Player_has_lost.class);
         }
 
-        intent.putExtra( "Controller", (Parcelable) controller );
+        intent.putExtra( "Controller", controller );
         startActivity(intent);
     }
+
 }

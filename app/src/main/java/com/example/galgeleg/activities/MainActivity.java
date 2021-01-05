@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.galgeleg.LoadingDialog;
 import com.example.galgeleg.R;
 import com.example.galgeleg.activities.GalgelegGame;
 
@@ -23,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Intent intent;
     String playerName;
     EditText editText;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
