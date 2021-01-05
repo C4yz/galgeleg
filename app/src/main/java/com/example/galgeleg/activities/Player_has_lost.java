@@ -15,7 +15,7 @@ import com.example.galgeleg.R;
 
 public class Player_has_lost extends AppCompatActivity implements View.OnClickListener {
 
-    GalgeController galgeController = GalgeController.getInstance();
+    GalgeController galgeController;
     String theWordToGuess;
     TextView textView;
     Button playAgain;
@@ -28,9 +28,9 @@ public class Player_has_lost extends AppCompatActivity implements View.OnClickLi
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_player_has_lost );
 
-        //Intent i = getIntent();
+        Intent i = getIntent();
 
-        //galgeController = i.getParcelableExtra( "Controller" );
+        galgeController = i.getParcelableExtra( "Controller" );
 
         theWordToGuess = this.galgeController.getTheWordToGuess();
         textView = (TextView) findViewById(R.id.playerLostTheWord);
