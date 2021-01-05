@@ -34,7 +34,7 @@ public class GalgelegGame extends AppCompatActivity implements Serializable {
     Executor bgThread = Executors.newSingleThreadExecutor();
     Handler uiHandler = new Handler(Looper.getMainLooper());
 
-    MyObj myObj = new MyObj();
+    MyObj myObj = new MyObj(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +119,7 @@ public class GalgelegGame extends AppCompatActivity implements Serializable {
             intent = new Intent(this, Player_has_lost.class);
         }
 
-        intent.putExtra( "Controller", (Serializable) myObj );
+        intent.putExtra( "Controller", (MyObj) myObj );
         startActivity(intent);
     }
 }

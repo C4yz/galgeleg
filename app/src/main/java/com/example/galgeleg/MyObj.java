@@ -9,11 +9,14 @@ public class MyObj implements Serializable {
     String name;
     int number;
     String something;
-    GalgelegGame galgelegGame = new GalgelegGame();
 
-    public MyObj() {
+    GalgelegGame galgelegGame;
+
+    public MyObj(GalgelegGame galgelegGame) {
         name = "Thomas";
         number = 22;
         something = "Something";
+        this.galgelegGame = galgelegGame;
     }
+
 }
