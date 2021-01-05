@@ -3,7 +3,9 @@ package com.example.galgeleg.game_state;
 import com.example.galgeleg.GalgeController;
 import com.example.galgeleg.Library;
 
-public class Running extends Adapter{
+import java.io.Serializable;
+
+public class Running extends Adapter implements Serializable {
 
     GalgeController galgeController;
 

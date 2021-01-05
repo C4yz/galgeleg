@@ -5,8 +5,9 @@ import com.example.galgeleg.Library;
 import com.example.galgeleg.activities.GalgelegGame;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class PlayerWon extends Adapter{
+public class PlayerWon extends Adapter implements Serializable {
 
     GalgeController galgeController;
 

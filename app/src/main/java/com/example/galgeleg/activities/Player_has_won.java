@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.galgeleg.GalgeController;
+import com.example.galgeleg.MyObj;
 import com.example.galgeleg.R;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
 
         Intent i = getIntent();
 
-        galgeController = i.getParcelableExtra( "Controller" );
+        galgeController = (GalgeController) i.getSerializableExtra( "Controller" );
         numberOfTries = i.getIntExtra("numberOfTires",0);
         playerName = i.getStringExtra("PlayerName");
 

@@ -5,9 +5,10 @@ import com.example.galgeleg.Library;
 import com.example.galgeleg.activities.Player_has_lost;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Random;
 
-public class PlayerLost extends Adapter{
+public class PlayerLost extends Adapter implements Serializable {
 
     GalgeController galgeController;
 

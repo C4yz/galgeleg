@@ -1,7 +1,5 @@
 package com.example.galgeleg.game_state;
 
-import java.io.IOException;
-
 public interface IGameState {
 
     void startNewGame(int choice) throws Exception;

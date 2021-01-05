@@ -3,9 +3,10 @@ package com.example.galgeleg.game_state;
 import com.example.galgeleg.GalgeController;
 import com.example.galgeleg.Library;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Initial extends Adapter {
+public class Initial extends Adapter implements Serializable {
 
     GalgeController galgeController;
     Library library = new Library();

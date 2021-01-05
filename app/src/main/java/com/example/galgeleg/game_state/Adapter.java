@@ -1,6 +1,8 @@
 package com.example.galgeleg.game_state;
 
-public class Adapter implements IGameState {
+import java.io.Serializable;
+
+public class Adapter implements IGameState, Serializable {
     @Override
     public void startNewGame(int choice) throws Exception {
 

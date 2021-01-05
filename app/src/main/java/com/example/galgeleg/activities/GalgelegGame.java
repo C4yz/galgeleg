@@ -2,9 +2,6 @@ package com.example.galgeleg.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,13 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.galgeleg.GalgeController;
+import com.example.galgeleg.MyObj;
 import com.example.galgeleg.R;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class GalgelegGame extends AppCompatActivity {
+public class GalgelegGame extends AppCompatActivity implements Serializable {
 
     private int choice;
     private String hiddenWord;
@@ -118,7 +117,7 @@ public class GalgelegGame extends AppCompatActivity {
             intent = new Intent(this, Player_has_lost.class);
         }
 
-        intent.putExtra( "Controller", (Parcelable) controller );
+        intent.putExtra( "Controller", (Serializable) controller );
         startActivity(intent);
     }
 }
