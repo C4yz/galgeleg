@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +46,10 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
         playAgain.setOnClickListener(this);
         menu.setOnClickListener(this);
         highList.setOnClickListener(this);
+
+        MediaPlayer player = MediaPlayer.create(this,R.raw.victorysoundeffect);
+        player.start();
+
     }
 
     @Override

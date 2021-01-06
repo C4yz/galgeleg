@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ public class MyHighScoreAdapter extends RecyclerView.Adapter<MyHighScoreAdapter.
             public void onClick(View v) {
 
                 Toast.makeText( context, highScoreList.get(position), Toast.LENGTH_SHORT ).show();
+
             }
         } );
     }
@@ -60,6 +62,7 @@ public class MyHighScoreAdapter extends RecyclerView.Adapter<MyHighScoreAdapter.
 
         TextView playerName;
         TextView playerScore;
+        Button deleteButton;
         RelativeLayout relativeLayout;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -67,6 +70,7 @@ public class MyHighScoreAdapter extends RecyclerView.Adapter<MyHighScoreAdapter.
 
             playerName = itemView.findViewById(R.id.listPlayerName);
             playerScore = itemView.findViewById(R.id.listPlayerScore);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
             relativeLayout = itemView.findViewById(R.id.relativeLayoutList);
         }
     }
