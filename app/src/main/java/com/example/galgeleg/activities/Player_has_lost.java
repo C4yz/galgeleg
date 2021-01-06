@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.view.View;
@@ -42,6 +43,9 @@ public class Player_has_lost extends AppCompatActivity implements View.OnClickLi
 
         playAgain.setOnClickListener(this);
         menu.setOnClickListener(this);
+
+        MediaPlayer player = MediaPlayer.create(this,R.raw.lost);
+        player.start();
     }
 
     @Override
