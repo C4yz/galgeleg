@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
     Button playAgain;
     Button menu;
     Button highList;
+    TextView text_animation;
     int choice;
     int numberOfTries;
     String playerName;
@@ -42,6 +45,7 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
         playAgain = findViewById(R.id.playerWonPlayAgain);
         menu = findViewById(R.id.playerWonMenu);
         highList = findViewById(R.id.highScoreButton);
+        text_animation = findViewById(R.id.textWinnerID);
 
         playAgain.setOnClickListener(this);
         menu.setOnClickListener(this);
@@ -50,6 +54,8 @@ public class Player_has_won extends AppCompatActivity implements View.OnClickLis
         MediaPlayer player = MediaPlayer.create(this,R.raw.victorysoundeffect);
         player.start();
 
+        Animation animation = AnimationUtils.loadAnimation(this,R.anim.anim);
+        text_animation.startAnimation(animation);
     }
 
     @Override
