@@ -68,6 +68,7 @@ public class Player_has_lost extends AppCompatActivity implements View.OnClickLi
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
